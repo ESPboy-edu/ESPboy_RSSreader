@@ -47,7 +47,7 @@ struct lessRssi{
 };
 
 
-RSSReader reader = RSSReader(3000);
+RSSReader reader = RSSReader(100);
 wificlient *wificl;
 std::vector<wf> wfList; 
 

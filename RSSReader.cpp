@@ -91,7 +91,11 @@ uint16_t RSSReader::checkStop(char ch){
         tagReadedClose="";}
       break;
     case START_CLOSE:
-      if(ch!='>') tagReadedClose+=ch;
+      if(ch!='>') {
+        tagReadedClose+=ch;
+        if(tagReadedClose=="!"){stateClose=INIT_CLOSE; returnFlag=0;};
+        if (tagReadedClose=="div") {stateClose=INIT_CLOSE; returnFlag=3;};  
+      }
       else{ 
         //Serial.println("");
         //Serial.println("DETECTED CLOSE "+ tagReadedClose);
@@ -99,9 +103,9 @@ uint16_t RSSReader::checkStop(char ch){
            tagReadedClose==tags[CLOSE_TITLE_TAG] ||
            tagReadedClose==tags[CLOSE_DESC_TAG]){
              returnFlag=tagReadedClose.length();}
-         stateClose=INIT_CLOSE;
-         break;     
+         stateClose=INIT_CLOSE;  
        }
+       break;   
    }
   }
  return(returnFlag);

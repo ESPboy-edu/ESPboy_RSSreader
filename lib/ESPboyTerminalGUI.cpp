@@ -193,7 +193,7 @@ void ESPboyTerminalGUI::printConsole(String bfrstr, uint16_t color, uint8_t ln, 
   }
 
   uint16_t traskStr=0;
-  for (uint8_t i = 0; i <= ((bfrstr.length()) / ((128-4)/GUI_FONT_WIDTH)); i++) {
+  for (uint8_t i = 0; i <= ((bfrstr.length()-1) / ((128-4)/GUI_FONT_WIDTH)); i++) {
     toprint = bfrstr.substring(traskStr);
     toprint = toprint.substring(0, (128-4)/GUI_FONT_WIDTH);
     traskStr += (128-4)/GUI_FONT_WIDTH;
