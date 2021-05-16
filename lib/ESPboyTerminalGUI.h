@@ -83,9 +83,9 @@ private:
   const static uint8_t keybOnscr[2][3][21] PROGMEM;
 
   uint8_t keysAction();
-	void drawConsole(uint8_t onlyLastLine);
-	void drawKeyboard(uint8_t slX, uint8_t slY, uint8_t onlySelected);
-	void drawBlinkingCursor();
+  void drawConsole(uint8_t onlyLastLine);
+  void drawKeyboard(uint8_t slX, uint8_t slY, uint8_t onlySelected);
+  void drawBlinkingCursor();
   void drawTyping(uint8_t);
   
 public:

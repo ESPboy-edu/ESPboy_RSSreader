@@ -54,9 +54,21 @@ std::vector<wf> wfList;
 
 bool smartDelay(uint32_t timeDelay){
   uint32_t timerCount = millis();
-  while (millis()-timerCount < timeDelay && !myESPboy.getKeys()){delay (200);}
-  return (!(!(myESPboy.getKeys()&PAD_ESC)));
+  uint32_t keysState;
+  
+  while (millis()-timerCount < timeDelay){
+    keysState=myESPboy.getKeys();
+    if (keysState&PAD_ESC || keysState&PAD_ACT)
+      break;
+    if(keysState&PAD_LFT ||keysState&PAD_RGT){
+      terminalGUIobj.doScroll();
+      timerCount = millis();}
+    else
+      delay (200); 
+  }
+  return (!(!(keysState&PAD_ESC)));
 };
+
 
 bool titleCallback(const char *titleStr) {
   terminalGUIobj.printConsole(titleStr, TFT_WHITE, 1, 0); 

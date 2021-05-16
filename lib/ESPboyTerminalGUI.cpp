@@ -161,7 +161,7 @@ void ESPboyTerminalGUI::doScroll(){
     tone(SOUNDPIN, 100, 10);
   #endif
   toggleDisplayMode(1);
-  while (!(keyState & GUI_PAD_ESC)){
+ // while (!(keyState & GUI_PAD_ESC)){
     delay(1);
     keyState = getKeys();
     if(keyState){
@@ -175,8 +175,9 @@ void ESPboyTerminalGUI::doScroll(){
       #endif
       delay(GUI_KEYB_CALL_DELAY);
     }
-  } 
+  //} 
 }
+
 
 void ESPboyTerminalGUI::printConsole(String bfrstr, uint16_t color, uint8_t ln, uint8_t noAddLine) {
   String toprint;
