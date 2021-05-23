@@ -95,8 +95,10 @@ uint8_t ESPboyTerminalGUI::keysAction() {
       }
 
       if (keyState & GUI_PAD_ESC) {
-        if (waitKeyUnpressed() > GUI_KEY_PRESSED_DELAY_TO_SEND)
+        if (waitKeyUnpressed() > GUI_KEY_PRESSED_DELAY_TO_SEND){
           keybParam.typing = "";
+          longActPress = 1;
+        }
         else if (keybParam.typing.length() > 0)
           keybParam.typing.remove(keybParam.typing.length() - 1);
       }
@@ -128,6 +130,7 @@ uint8_t ESPboyTerminalGUI::keysAction() {
   return (longActPress);
 }
 
+
 void ESPboyTerminalGUI::toggleDisplayMode(uint8_t mode) {
   keybParam.displayMode = mode;
   tft->fillScreen(TFT_BLACK);
@@ -145,10 +148,10 @@ void ESPboyTerminalGUI::toggleDisplayMode(uint8_t mode) {
 String ESPboyTerminalGUI::getUserInput() {
   String userInput;
   toggleDisplayMode(0);
-  while (1) {
+  //while (1) {
     while (!keysAction()) delay(GUI_KEYB_CALL_DELAY);
-    if (keybParam.typing != "") break;
-  }
+    //if (keybParam.typing != "") break;
+  //}
   toggleDisplayMode(1);
   userInput = keybParam.typing;
   keybParam.typing = "";
